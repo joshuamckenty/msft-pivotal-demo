@@ -5,15 +5,16 @@ applications:
     memory: 1024M
     services:
       - registry
-#      - config
+      - config
       - rabbit
+      - azuresql-demo
   - name: cover-client
     path: ./cover-client/target/cover-client.jar
     memory: 1024M
     services:
       - registry
-#      - config
-      - breaker
+      - config
+#      - breaker
       - rabbit
   - name: cover-zipkin
     memory: 1024M

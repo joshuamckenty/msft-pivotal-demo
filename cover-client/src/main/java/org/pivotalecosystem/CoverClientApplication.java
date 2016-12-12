@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 
+@EnableCircuitBreaker
 @SpringBootApplication
 public class CoverClientApplication {
 
@@ -38,7 +40,7 @@ class CoverServiceClientRestController {
     private final RestTemplate restTemplate;
 
     public CoverServiceClientRestController(@Value("${cover.client.failsafe.cover-types:NotConfigured}") String fallbackCoverTypes,
-                                            @Value("${cover.client.coverServiceLogicalName:COVER-SERVICE}") String coverServiceLogicalName,
+                                            @Value("${cover.client.coverServiceLogicalName:cover-server}") String coverServiceLogicalName,
                                             @Value("${cover.client.coverTypesEndpoint:covers}") String coverTypesEndpoint,
                                             RestTemplate restTemplate) {
         this.fallbackCoverTypes = fallbackCoverTypes;
