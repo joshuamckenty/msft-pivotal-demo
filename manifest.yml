@@ -1,0 +1,23 @@
+---
+applications:
+  - name: cover-server
+    path: ./cover-server/target/cover-server.jar
+    memory: 1024M
+    services:
+      - registry
+#      - config
+      - rabbit
+  - name: cover-client
+    path: ./cover-client/target/cover-client.jar
+    memory: 1024M
+    services:
+      - registry
+#      - config
+      - breaker
+      - rabbit
+  - name: cover-zipkin
+    memory: 1024M
+    path: ./zipkin-server/target/zipkin-server.jar
+    services:
+      - rabbit
+      - registry
