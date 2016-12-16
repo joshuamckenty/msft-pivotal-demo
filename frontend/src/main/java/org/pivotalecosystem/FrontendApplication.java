@@ -1,7 +1,6 @@
 package org.pivotalecosystem;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +9,9 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,8 +57,14 @@ class FrontendController {
     @HystrixCommand(fallbackMethod = "getCoversFallbackMethod")
 	@RequestMapping("/")
 	String index(Model model) {
+
         URI uri = URI.create("//" + coverServiceLogicalName + "/" + coverTypesEndpoint);
-        Collection<org.pivotalecosystem.Cover> covers = this.restTemplate.getForObject(uri, Collection.class);
+        ParameterizedTypeReference<Collection<Cover>> typeReference =
+                new ParameterizedTypeReference<Collection<Cover>>() { };
+        ResponseEntity<Collection<Cover>> responseEntity = this.restTemplate.exchange(uri,
+                HttpMethod.GET, null, typeReference);
+        Collection<Cover> covers = responseEntity.getBody();
+
         model.addAttribute("covers", covers);
 		return "index";
 	}
@@ -64,5 +72,27 @@ class FrontendController {
 	String getCoversFallbackMethod(Model model) {
         model.addAttribute("covers", new Cover("Default Cover"));
         return "index";
+    }
+}
+
+
+class Cover {
+
+    private Long id;
+
+    private String coverName;
+
+    public Cover(String coverName) {
+        this.coverName = coverName;
+    }
+
+    public Cover() { }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getCoverName() {
+        return coverName;
     }
 }

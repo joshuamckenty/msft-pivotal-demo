@@ -46,11 +46,6 @@
 			<groupId>io.pivotal.spring.cloud</groupId>
 			<artifactId>spring-cloud-services-starter-circuit-breaker</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>org.pivotalecosystem</groupId>
-            <artifactId>cover-server</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
 	<dependencyManagement>
