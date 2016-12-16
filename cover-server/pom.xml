@@ -62,6 +62,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- HyperSQL DB -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>${hsqldb.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>

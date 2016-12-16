@@ -8,6 +8,11 @@ applications:
       - config
       - rabbit
       - azuresql-demo
+    env:
+      spring_datasource_driver-class-name: 'com.microsoft.sqlserver.jdbc.SQLServerDriver'
+      spring_datasource_url: '${cloud.services.sqlserver.connection.uri}'
+      spring_jpa_properties_hibernate_dialect: 'org.hibernate.dialect.SQLServer2012Dialect'
+
   - name: cover-client
     path: ./cover-client/target/cover-client.jar
     memory: 1024M
