@@ -39,11 +39,18 @@
 				<!-- Intro -->
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
-							<h1  th:text="'Covers: ' + ${covers}"></h1>
 
-							<ul class="actions">
-								<li><a href="#one" class="button scrolly">Learn more</a></li>
-							</ul>
+							<div th:each="c : ${covers}">
+
+								<div>
+									<b th:text="${c.id}">ID</b> -
+									<span th:text="${c.coverName}">Name</span>
+								</div>
+							</div>
+
+							<!--<ul class="actions">-->
+								<!--<li><a href="#one" class="button scrolly">Learn more</a></li>-->
+							<!--</ul>-->
 						</div>
 					</section>
 

@@ -1,6 +1,7 @@
 package org.pivotalecosystem;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.util.Collection;
 
 @EnableCircuitBreaker
 @SpringBootApplication
@@ -54,13 +56,13 @@ class FrontendController {
 	@RequestMapping("/")
 	String index(Model model) {
         URI uri = URI.create("//" + coverServiceLogicalName + "/" + coverTypesEndpoint);
-        String covers = this.restTemplate.getForObject(uri, String.class);
+        Collection<org.pivotalecosystem.Cover> covers = this.restTemplate.getForObject(uri, Collection.class);
         model.addAttribute("covers", covers);
 		return "index";
 	}
 
 	String getCoversFallbackMethod(Model model) {
-        model.addAttribute("covers", "foo");
+        model.addAttribute("covers", new Cover("Default Cover"));
         return "index";
     }
 }

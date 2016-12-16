@@ -13,9 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
@@ -76,26 +73,3 @@ class CoverServerRestController {
     }
 }
 
-@Entity
-class Cover {
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    private String coverName;
-
-    public Cover(String coverName) {
-        this.coverName = coverName;
-    }
-
-    public Cover() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getCoverName() {
-        return coverName;
-    }
-}
