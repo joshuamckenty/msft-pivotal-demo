@@ -1,7 +1,5 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
-sqldb-example-config.json
-creds.txt
 
 ### STS ###
 .apt_generated

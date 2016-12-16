@@ -16,6 +16,14 @@ applications:
       - config
 #      - breaker
       - rabbit
+  - name: frontend
+    path: ./frontend/target/frontend.jar
+    memory: 1024M
+    services:
+      - registry
+      - config
+#      - breaker
+      - rabbit
   - name: cover-zipkin
     memory: 1024M
     path: ./zipkin-server/target/zipkin-server.jar
