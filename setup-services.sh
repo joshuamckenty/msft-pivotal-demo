@@ -3,3 +3,4 @@ cf cs p-rabbitmq standard rabbit
 cf cs p-circuit-breaker-dashboard standard breaker
 cf cs p-service-registry standard registry
 cf cs p-config-server standard config -c config-server-setup.json
+cf cs azure-sqldb basic azuresql-demo -c sqldb-example-config.json

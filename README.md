@@ -35,7 +35,7 @@ sed -i '' 's/joshuamckenty/mygithubname/' config-server-setup.json
 
 Now login to CF, and create the needed services:
 ```bash
-cf login -a $CFAPI
+cf login -a http://$CFAPI
 ./setup-services.sh
 ```
 
