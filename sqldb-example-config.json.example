@@ -1,0 +1,24 @@
+{
+  "resourceGroup": "jointwebinar-rg",
+  "location": "westus",
+  "sqlServerName": "azuresql-demo",
+  "sqlServerParameters": {
+      "allowSqlServerFirewallRules": [
+          {
+              "ruleName": "rule0",
+              "startIpAddress": "1.0.0.0",
+              "endIpAddress": "255.255.255.255"
+          }
+      ],
+      "properties": {
+          "administratorLogin": "myadmin",
+          "administratorLoginPassword": "CHANGEME"
+      }
+  },
+  "sqldbName": "azuresql-demoDB",
+  "sqldbParameters": {
+      "properties": {
+          "collation": "SQL_Latin1_General_CP1_CI_AS"
+      }
+  }
+}

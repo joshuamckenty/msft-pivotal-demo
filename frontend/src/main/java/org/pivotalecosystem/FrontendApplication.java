@@ -24,15 +24,15 @@ import java.util.Collection;
 @SpringBootApplication
 @EnableDiscoveryClient
 public class FrontendApplication {
+	public static void main(String[] args) {
+		SpringApplication.run(FrontendApplication.class, args);
+	}
+
     @Bean
     @LoadBalanced
     public RestTemplate rest(RestTemplateBuilder builder) {
         return builder.build();
     }
-
-	public static void main(String[] args) {
-		SpringApplication.run(FrontendApplication.class, args);
-	}
 }
 
 
