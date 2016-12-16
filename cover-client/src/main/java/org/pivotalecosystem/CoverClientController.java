@@ -2,17 +2,16 @@ package org.pivotalecosystem;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 
-/**
- * Created by jmckenty on 12/15/16.
- */
-//@RefreshScope
-@Controller
+
+@RefreshScope
+@RestController
 class CoverClientController {
 
     private final String fallbackCoverTypes;
@@ -31,7 +30,7 @@ class CoverClientController {
     }
 
     @HystrixCommand(fallbackMethod = "getCoversFallbackMethod")
-    @RequestMapping("/covers")
+    @GetMapping("/covers")
     String index() {
         URI uri = URI.create("//" + coverServiceLogicalName + "/" + coverTypesEndpoint);
         return this.restTemplate.getForObject(uri, String.class);
